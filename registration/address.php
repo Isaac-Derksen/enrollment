@@ -2,7 +2,7 @@
     require_once "../config.php";
     require_once "../models/address.php";
 
-    if ($_SERVER["REQUEST_METHOD"] == "post") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $address = $address_error = "";
 
         if (empty(trim($_POST["addr"]))) {
