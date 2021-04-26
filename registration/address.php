@@ -1,4 +1,35 @@
 <?php
+    require_once "../config.php";
+    require_once "../models/address.php";
+
+    if ($_SERVER["REQUEST_METHOD"] == "post") {
+        $address = $address_error = "";
+
+        if (empty(trim($_POST["addr"]))) {
+            $address_error = "No address supplied.";
+        } else {
+            $params = explode(',', trim($_POST["addr"]));
+            $addr = "";
+            try {
+                $addr = new Address($params[0], $params[1], $params[2], (int)$params[3]);
+            } catch (Exception $e) {
+                $address_error = "Supplied address is invalid: ". $e;
+            }
+
+            $sql = "SELECT AddressID FROM Address WHERE Street == ? AND City = ? AND State = ? AND Zipcode = ?";
+
+            if (($stmt = $conn->prepare($sql)) && !empty($addr)) {
+                $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+
+                $param_street = $addr->street;
+                $param_city   = $addr->city;
+                $param_state  = $addr->state;
+                $param_zip    = (string)$addr->zip;
+            }
+        }
+    }
+
+
 // old address code
     // /**
     //  * Checks to see if the address has errors in the syntax
@@ -80,3 +111,28 @@
     //     }
     // }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link media="all" type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+            <div class="form-group">
+                <label for="addr">Address:</label>
+                <input type="text" name="addr"
+                    class="form-control <?php echo (!empty($address_error)) ? 'is-invalid' : ''; if ($_SERVER["REQUEST_METHOD"] == "post" && empty($address_error)) echo 'is-valid' ?>"
+                    value="<?php echo $address; ?>">
+                <span class="invalid-feedback"><?php echo $address_error; ?></span>
+                <input type="submit" value="Check Address">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
