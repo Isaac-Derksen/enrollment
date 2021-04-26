@@ -104,12 +104,13 @@
             </div>
 
             <div class="form-group">
-                <label for="addr">Address</label>
+                <iframe src="./address.php" frameborder="1"></iframe>
+                <!-- <label for="addr">Address</label>
                 <input type="text" name="addr"
                     class="form-control <?php echo (!empty($address_error)) ? "is-invalid" : ""; ?>"
                     value="<?php echo $address; ?>"
                 >
-                <span class="invalid-feedback"><?php echo $address_error; ?></span>
+                <span class="invalid-feedback"><?php echo $address_error; ?></span> -->
             </div>
 
             <div class="form-group">
