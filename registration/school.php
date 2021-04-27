@@ -2,8 +2,8 @@
     // form names should be: SchoolName = name; District = dist; Address = addr
     require_once "../config.php";
     
-    $name = $district = $street = $city = $state = $zip = "";
 
+    $name = $district = $street = $city = $state = $zip = "";
     $name_error = $district_error = $address_error = $street_error = $city_error = $state_error = $zip_error = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -64,7 +64,6 @@
 
         // Check to see if any errors exist and if not, add the entry to the database
         if (empty($name_error) && empty($district_error) && empty($address_error) && empty($street) && empty($city) && empty($state) && empty($zip)) {
-
             $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -108,6 +107,7 @@
                 $stmt->close();
             }
             
+        if (empty($name_error) && empty($district_error) && empty($address_error)) {
             $sql = "INSERT INTO School (Name, District, AddressID) VALUES (?, ?, ?)";
 
             if ($stmt = $conn->prepare($sql)) {
