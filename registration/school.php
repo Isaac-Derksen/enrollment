@@ -2,8 +2,9 @@
     // form names should be: SchoolName = name; District = dist; Address = addr
     require_once "../config.php";
     
-    $name = $district = $address = "";
-    $name_error = $district_error = $address_error = "";
+    $name = $district = $street = $city = $state = $zip = "";
+
+    $name_error = $district_error = $address_error = $street_error = $city_error = $state_error = $zip_error = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty(trim($_POST["name"]))) {
@@ -36,20 +37,77 @@
             $district = trim($_POST["dist"]);
         }
 
-        $address = "0";
-        // old address code
-        #if (empty(trim($_POST["addr"]))) {
-        #    $address_error = "Please supply the address of the school.";
-        #} else {
-        #    $addr = buildAddress(trim($_POST["addr"]));
-        #    if ($addr === null) {
-        #        $address_error = "This is not a valid address.";
-        #    } else {
-        #        $address = addAddress($addr);
-        #    }
-        #}
+        if (empty(trim($_POST["street"]))) {
+            $street_error = "Please supply the street address.";
+        } else {
+            $street = trim($_POST["street"]);
+        }
 
-        if (empty($name_error) && empty($district_error) && empty($address_error)) {
+        if (empty(trim($_POST["city"]))) {
+            $street_error = "Please supply the city the school is located in.";
+        } else {
+            $street = trim($_POST["city"]);
+        }
+
+        if (empty(trim($_POST["state"]))) {
+            $street_error = "Please supply the state the school is located in.";
+        } else {
+            $street = trim($_POST["state"]);
+        }
+
+        if (empty(trim($_POST["zip"]))) {
+            $street_error = "Please supply the zip code";
+        } else {
+            $street = trim($_POST["zip"]);
+        }
+
+
+        // Check to see if any errors exist and if not, add the entry to the database
+        if (empty($name_error) && empty($district_error) && empty($address_error) && empty($street) && empty($city) && empty($state) && empty($zip)) {
+
+            $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
+
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+
+                $param_street = $street;
+                $param_city = $city;
+                $param_state = $state;
+                $param_zip = $zip;
+
+                if ($stmt->execute()) {
+                    $stmt->store_result();
+
+                    if ($stmt->num_rows == 1) {
+                        $address = $stmt->fetch_assoc()[0];
+                    } else {
+                        $stmt->close();
+                        $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
+
+                        if ($stmt = $conn->prepare($sql)) {
+                            $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+
+                            $param_street = $street;
+                            $param_city = $city;
+                            $param_state = $state;
+                            $param_zip = $zip;
+
+                            if ($stmt->execute()) {
+                                $stmt->store_result();
+
+                                $address = $stmt->insert_id;
+                            } else {
+                                echo "Something went wrong, please try again later.";
+                            }
+                            $stmt->close();
+                        }
+                    }
+                } else {
+                    "Something went wrong, please try again.";
+                }
+                $stmt->close();
+            }
+            
             $sql = "INSERT INTO School (Name, District, AddressID) VALUES (?, ?, ?)";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -98,19 +156,37 @@
                 <label for="dist">District</label>
                 <input type="text" name="dist"
                     class="form-control <?php echo (!empty($district_error)) ? "is-invalid" : ""; ?>"
-                    value="<?php echo $district; ?>"
-                >
+                    value="<?php echo $district; ?>">
                 <span class="invalid-feedback"><?php echo $district_error; ?></span>
             </div>
 
             <div class="form-group">
-                <iframe src="./address.php" frameborder="1"></iframe>
-                <!-- <label for="addr">Address</label>
-                <input type="text" name="addr"
-                    class="form-control <?php echo (!empty($address_error)) ? "is-invalid" : ""; ?>"
-                    value="<?php echo $address; ?>"
-                >
-                <span class="invalid-feedback"><?php echo $address_error; ?></span> -->
+                <label for="street"></label>
+                <input type="text" name="street" 
+                    class="form-control <?php echo (!empty($street_error)) ? "in-invalid" : ""; ?>"
+                    value="<?php echo $street ?>">
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="city"></label>
+                <input type="text" name="city" 
+                    class="form-control <?php echo (!empty($city_error)) ? "is-invalid" : ""; ?>"
+                    value="<?php echo $city ?>">
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="state"></label>
+                <input type="text" name="state" 
+                    class="form-control <?php echo (!empty($state_error)) ? "is-invalid" : ""; ?>"
+                    value="<?php echo $state ?>">
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="zip"></label>
+                <input type="text" name="zip" 
+                    class="form-control <?php echo (!empty($zip_error)) ? "is-invalid" : ""; ?>"
+                    value="<?php echo $zip ?>">
+                <span class="invalid-feedback"></span>
             </div>
 
             <div class="form-group">
