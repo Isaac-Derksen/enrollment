@@ -78,7 +78,7 @@
                     $stmt->store_result();
 
                     if ($stmt->num_rows == 1) {
-                        $address = $stmt->fetch_assoc()[0];
+                        $address = $stmt->get_result()->fetch_row()[0];
                     } else {
                         $stmt->close();
                         $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
@@ -107,23 +107,6 @@
                 $stmt->close();
             }
             
-        if (empty($name_error) && empty($district_error) && empty($address_error)) {
-            $sql = "INSERT INTO School (Name, District, AddressID) VALUES (?, ?, ?)";
-
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sss", $param_name, $param_district, $param_address);
-
-                $param_name = $name;
-                $param_district = $district;
-                $param_address = $address;
-
-                if ($stmt->execute()) {
-                    header("location: view.php");
-                } else {
-                    echo "something went wrong, please try again later.";
-                }
-                $stmt->close();
-            }
         }
         $conn->close();
     }
@@ -144,18 +127,18 @@
     <div class="wrapper">
         <h2>School Registration</h2>
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-        <div class="form-group">
-                <label for="name">School Name</label>
-                <input type="text" name="name" 
-                    class="form-control <?php echo (!empty($name_error)) ? "is-invalid" : ""; ?>"
-                    value="<?php echo $name; ?>">
-                <span class="invalid-feedback"><?php echo $name_error; ?></span>
+            <div class="form-group">
+                    <label for="name">School Name</label>
+                    <input type="text" name="name" 
+                        class="form-control <?php echo (!empty($name_error)) ? 'is-invalid' : ''; ?>"
+                        value="<?php echo $name; ?>">
+                    <span class="invalid-feedback"><?php echo $name_error; ?></span>
             </div>
 
             <div class="form-group">
                 <label for="dist">District</label>
                 <input type="text" name="dist"
-                    class="form-control <?php echo (!empty($district_error)) ? "is-invalid" : ""; ?>"
+                    class="form-control <?php echo (!empty($district_error)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $district; ?>">
                 <span class="invalid-feedback"><?php echo $district_error; ?></span>
             </div>
