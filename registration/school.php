@@ -107,6 +107,23 @@
                 $stmt->close();
             }
             
+            $sql = "INSERT INTO School Values (?, ?, ?)";
+
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("sss", $param_name, $param_district, $param_addr);
+
+                $param_name = $name;
+                $param_district = $district;
+                $param_addr = $address;
+
+                if ($stmt->execute()) {
+                    $id = $stmt->insert_id;
+                    $url = "/school/view.php?id=".$id;
+                    header("location: ".$url);
+                } else {
+                    echo "Something went wrong, please try again.";
+                }
+            }
         }
         $conn->close();
     }
@@ -148,28 +165,28 @@
                 <input type="text" name="street" 
                     class="form-control <?php echo (!empty($street_error)) ? "in-invalid" : ""; ?>"
                     value="<?php echo $street; ?>">
-                <span class="invalid-feedback"><?php echo $street_error ?></span>
+                <span class="invalid-feedback"><?php echo $street_error; ?></span>
             </div>
             <div class="form-group">
                 <label for="city">City</label>
                 <input type="text" name="city" 
                     class="form-control <?php echo (!empty($city_error)) ? "is-invalid" : ""; ?>"
                     value="<?php echo $city; ?>">
-                <span class="invalid-feedback"><?php echo $city_error ?></span>
+                <span class="invalid-feedback"><?php echo $city_error; ?></span>
             </div>
             <div class="form-group">
                 <label for="state">State</label>
                 <input type="text" name="state" 
                     class="form-control <?php echo (!empty($state_error)) ? "is-invalid" : ""; ?>"
                     value="<?php echo $state; ?>">
-                <span class="invalid-feedback"><?php echo $state_error ?></span>
+                <span class="invalid-feedback"><?php echo $state_error; ?></span>
             </div>
             <div class="form-group">
                 <label for="zip">Zipcode</label>
                 <input type="text" name="zip" 
                     class="form-control <?php echo (!empty($zip_error)) ? "is-invalid" : ""; ?>"
                     value="<?php echo $zip; ?>">
-                <span class="invalid-feedback"><?php echo $zip_error ?></span>
+                <span class="invalid-feedback"><?php echo $zip_error; ?></span>
             </div>
 
             <div class="form-group">
