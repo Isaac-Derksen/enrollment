@@ -74,6 +74,7 @@
                 $param_state = $state;
                 $param_zip = $zip;
 
+                echo "<script>alert('ping');</script>";
                 if ($stmt->execute()) {
                     $stmt->store_result();
 
@@ -116,9 +117,7 @@
                 $param_addr = $address;
 
                 if ($stmt->execute()) {
-                    $id = $stmt->insert_id;
-                    $url = "/school/view.php?id=".$id;
-                    header("location: ".$url);
+                    
                 } else {
                     echo "Something went wrong, please try again.";
                 }
