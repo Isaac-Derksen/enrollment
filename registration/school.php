@@ -78,7 +78,9 @@
                     $stmt->store_result();
                     
                     if ($stmt->num_rows == 1) {
-                        $address = $stmt->get_result()->fetch_assoc()[0];
+                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                            $address = $row["AddressID"];
+                        }
                     } else {
                         $stmt->close();
                         $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
