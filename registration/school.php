@@ -3,8 +3,8 @@
     require_once "../config.php";
     
 
-    $name = $district = $street = $city = $state = $zip = "";
-    $name_error = $district_error = $address_error = $street_error = $city_error = $state_error = $zip_error = "";
+    $name = $district = $address = $street = $city = $state = $zip = "";
+    $name_error = $district_error = $street_error = $city_error = $state_error = $zip_error = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty(trim($_POST["name"]))) {
@@ -63,7 +63,7 @@
 
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (empty($name_error) && empty($district_error) && empty($address_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error)) {
+        if (empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error)) {
             $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
             if ($stmt = $conn->prepare($sql)) {
