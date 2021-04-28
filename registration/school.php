@@ -74,16 +74,16 @@
                 $param_state = $state;
                 $param_zip = $zip;
 
-                echo "<script>alert('ping');</script>";
                 if ($stmt->execute()) {
                     $stmt->store_result();
-
+                    
                     if ($stmt->num_rows == 1) {
-                        $address = $stmt->get_result()->fetch_row()[0];
+                        $address = $stmt->get_result()->fetch_assoc()[0];
                     } else {
                         $stmt->close();
                         $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
 
+                        echo "<script>alert('ping');</script>";
                         if ($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
