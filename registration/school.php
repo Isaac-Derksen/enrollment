@@ -44,21 +44,21 @@
         }
 
         if (empty(trim($_POST["city"]))) {
-            $street_error = "Please supply the city the school is located in.";
+            $city_error = "Please supply the city the school is located in.";
         } else {
-            $street = trim($_POST["city"]);
+            $city = trim($_POST["city"]);
         }
 
         if (empty(trim($_POST["state"]))) {
-            $street_error = "Please supply the state the school is located in.";
+            $state_error = "Please supply the state the school is located in.";
         } else {
-            $street = trim($_POST["state"]);
+            $state = trim($_POST["state"]);
         }
 
         if (empty(trim($_POST["zip"]))) {
-            $street_error = "Please supply the zip code";
+            $zip_error = "Please supply the zip code";
         } else {
-            $street = trim($_POST["zip"]);
+            $zip = trim($_POST["zip"]);
         }
 
 
