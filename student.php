@@ -1,6 +1,6 @@
 <html>
 <body>
-    <form action="./tests.php" method="post">
+    <form action="./studentcontact.php" method="post">
     <!-- this is the student name and identification -->
         <label for="studentid">Student ID:</label>
             <input type="text" name="studentid" id="studentid">
@@ -26,7 +26,7 @@
     <br>
     <!-- these would be the contact information -->
         <label for="phonenumber">Phone number: </label>
-            <input type="text" name="phonenumber" id="phonenumber">
+            <input type="text" name="Phonenumber" id="Phonenumber">
         <label for="email"> Email: </label>
             <input type="text" name="email" id="Email">
     <br>
@@ -57,7 +57,7 @@
             $sql = strtr('INSERT INTO Student(StudentID, Firstname, Middlename, Lastname, Gender, Birthdate, Phonenumber, Email, AddressID, GradeLevel, isFullyEnrolled)
                 values ("%StudentID","fname","mname","lname","gender","bday","pnumber","email","addressid","gradelevel","enrolled");',[
                 "%StudentID" => $_POST["studentid"], "fname" => $_POST["fname"], "mname" => $_POST["mname"], "lname" => $_POST["lname"],
-                "gender" => $_POST["gender"], "bday" => $_POST["Date"], "pnumber" => $_POST["phonenumber"], "email" => $_POST["email"],
+                "gender" => $_POST["gender"], "bday" => $_POST["Date"], "pnumber" => $_POST["Phonenumber"], "email" => $_POST["email"],
                 "gradelevel" => $_POST["number"], "enrolled" => $_POST["enrolled"]
             ]);
             $conn->query($sql);

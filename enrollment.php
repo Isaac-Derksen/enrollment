@@ -18,7 +18,7 @@
     $db = "test";
 
     $conn = new mysqli($server, $user, $pass, $db);
-    $sql = strtr('INSERT INTO classenrollment values ("enrolled", "67536", "12");',[
+    $sql = strtr('INSERT INTO classenrollment values ("enrolled", "", "");',[
         "enrolled" => $_POST['enrolled']
     ]);
     $conn->query($sql);
