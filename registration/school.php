@@ -142,7 +142,7 @@
 <body>
     <div class="wrapper">
         <h2>School Registration</h2>
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
             <div class="form-group">
                     <label for="name">School Name</label>
                     <input type="text" name="name" 
