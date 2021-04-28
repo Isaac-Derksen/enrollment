@@ -104,7 +104,6 @@
                 } else {
                     "Something went wrong, please try again.";
                 }
-                $stmt->close();
             }
             
             $sql = "INSERT INTO School Values (?, ?, ?)";
