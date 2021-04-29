@@ -1,15 +1,15 @@
 <html>
 <body>
     <form action="./studentcontact.php" method="POST">
-    <label for="studentid">Student ID:</label>
-    <input type="number" name="StudentID" id="studentID">
-    <label for="Name">Name:</label>
-    <input type="text" name="Name" id="Name">
-    <label for="Relationship">Relationship: </label>
-    <input type="text" name="Relationship" id="Relationship">
-    <label for="Phonenumber">Phone Number: </label>
-    <input type="text" name="Phonenumber" id="Phonenumber">
-    <input type="submit" value="submit">
+        <label for="studentid">Student ID:</label>
+        <input type="number" name="StudentID" id="studentID">
+        <label for="Name">Name:</label>
+        <input type="text" name="Name" id="Name">
+        <label for="Relationship">Relationship: </label>
+        <input type="text" name="Relationship" id="Relationship">
+        <label for="Phonenumber">Phone Number: </label>
+        <input type="text" name="Phonenumber" id="Phonenumber">
+        <input type="submit" value="submit">
     </form>
 </body>
 </html>
