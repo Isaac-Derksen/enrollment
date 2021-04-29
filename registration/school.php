@@ -83,16 +83,10 @@
                         }
                     } else {
                         $stmt->close();
-                        $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
+                        $sql = "INSERT INTO Address VALUES (?, ?, ?, ?);";
 
-                        echo "<script>alert('ping');</script>";
                         if ($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
-
-                            $param_street = $street;
-                            $param_city = $city;
-                            $param_state = $state;
-                            $param_zip = $zip;
 
                             if ($stmt->execute()) {
                                 $stmt->store_result();
@@ -109,7 +103,7 @@
                 }
             }
             
-            $sql = "INSERT INTO School Values (?, ?, ?)";
+            $sql = "INSERT INTO School VALUES (?, ?, ?);";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("sss", $param_name, $param_district, $param_addr);
@@ -145,11 +139,11 @@
         <h2>School Registration</h2>
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
             <div class="form-group">
-                    <label for="name">School Name</label>
-                    <input type="text" name="name" 
-                        class="form-control <?php echo (!empty($name_error)) ? 'is-invalid' : ''; ?>"
-                        value="<?php echo $name; ?>">
-                    <span class="invalid-feedback"><?php echo $name_error; ?></span>
+                <label for="name">School Name</label>
+                <input type="text" name="name" 
+                    class="form-control <?php echo (!empty($name_error)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $name; ?>">
+                <span class="invalid-feedback"><?php echo $name_error; ?></span>
             </div>
 
             <div class="form-group">
@@ -189,10 +183,11 @@
                 <span class="invalid-feedback"><?php echo $zip_error; ?></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary">
-                <input type="reset" value="Reset" class="btn btn-secondary m1-2">
-            </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="reset" value="Reset" class="btn btn-secondary m1-2">
+            <!-- <div class="form-group">
+                
+            </div> -->
         </form>
     </div>
 </body>
