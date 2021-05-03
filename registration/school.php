@@ -63,7 +63,7 @@
 
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error)) {
+        if (/* empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error) */ true) {
             $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
             // if ($stmt = $conn->prepare($sql)) {
