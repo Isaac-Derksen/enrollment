@@ -89,7 +89,7 @@
 
                                 $address = $stmt->insert_id;
                             } else {
-                                echo "Something went wrong, please try again later. ".$stmt->error;
+                                echo "Something went wrong, please try again later. ";
                                 exit();
                             }
                             $stmt->close();
