@@ -81,6 +81,11 @@
                         $stmt->close();
                         $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?);";
 
+                        $param_street = $street;
+                        $param_city = $city;
+                        $param_state = $state;
+                        $param_zip = $zip;
+
                         if ($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
