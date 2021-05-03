@@ -116,7 +116,7 @@
                 $param_addr = $address;
 
                 if ($stmt->execute()) {
-                    echo "Record created";
+                    header("location: ../schools?id=".$stmt->insert_id);
                 } else {
                     echo "Something went wrong, please try again.";
                 }
