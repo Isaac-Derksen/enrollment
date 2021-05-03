@@ -63,7 +63,7 @@
 
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error)) {
+        if (/* empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error) */ true) {
             $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -76,49 +76,47 @@
 
                 if ($stmt->execute()) {
                     $stmt->store_result();
-
-                    if ($stmt->num_rows == 1) {
-                        $address = $stmt->get_result()->fetch_row()[0];
-                    } else {
+                    
+                    if ($stmt->num_rows != 1) {
                         $stmt->close();
-                        $sql = "INSERT INTO Address Values (?, ?, ?, ?);";
+                        $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?)";
 
                         if ($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
-
-                            $param_street = $street;
-                            $param_city = $city;
-                            $param_state = $state;
-                            $param_zip = $zip;
 
                             if ($stmt->execute()) {
                                 $stmt->store_result();
 
                                 $address = $stmt->insert_id;
                             } else {
-                                echo "Something went wrong, please try again later.";
+                                echo "Something went wrong, please try again later. ";
+                                exit();
                             }
                             $stmt->close();
+                        }
+                    } elseif ($stmt->num_rows == 1) {
+                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                            $address = $row["AddressID"];
+                            echo $address;
                         }
                     }
                 } else {
                     "Something went wrong, please try again.";
+                    exit();
                 }
             }
             
-            $sql = "INSERT INTO School Values (?, ?, ?)";
+            $sql = "INSERT INTO School(Name, District, AddressID) VALUES (?, ?, ?);";
 
             if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("sss", $param_name, $param_district, $param_addr);
+                $stmt->bind_param("ssi", $param_name, $param_district, $param_addr);
 
                 $param_name = $name;
                 $param_district = $district;
                 $param_addr = $address;
 
                 if ($stmt->execute()) {
-                    $id = $stmt->insert_id;
-                    $url = "/school/view.php?id=".$id;
-                    header("location: ".$url);
+                    echo "Record created";
                 } else {
                     echo "Something went wrong, please try again.";
                 }
@@ -144,11 +142,11 @@
         <h2>School Registration</h2>
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
             <div class="form-group">
-                    <label for="name">School Name</label>
-                    <input type="text" name="name" 
-                        class="form-control <?php echo (!empty($name_error)) ? 'is-invalid' : ''; ?>"
-                        value="<?php echo $name; ?>">
-                    <span class="invalid-feedback"><?php echo $name_error; ?></span>
+                <label for="name">School Name</label>
+                <input type="text" name="name" 
+                    class="form-control <?php echo (!empty($name_error)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $name; ?>">
+                <span class="invalid-feedback"><?php echo $name_error; ?></span>
             </div>
 
             <div class="form-group">
@@ -188,10 +186,11 @@
                 <span class="invalid-feedback"><?php echo $zip_error; ?></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary">
-                <input type="reset" value="Reset" class="btn btn-secondary m1-2">
-            </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="reset" value="Reset" class="btn btn-secondary m1-2">
+            <!-- <div class="form-group">
+                
+            </div> -->
         </form>
     </div>
 </body>
