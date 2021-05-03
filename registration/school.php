@@ -64,67 +64,60 @@
 
         // Check to see if any errors exist and if not, add the entry to the database
         if (/* empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error) */ true) {
-            // $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
+            $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
-            echo $name;
-            echo $district;
-            echo $street;
-            echo $city;
-            echo $state;
-            echo $zip;
-            
-            // if ($stmt = $conn->prepare($sql)) {
-            //     $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
-            //     $param_street = $street;
-            //     $param_city = $city;
-            //     $param_state = $state;
-            //     $param_zip = $zip;
+                $param_street = $street;
+                $param_city = $city;
+                $param_state = $state;
+                $param_zip = $zip;
 
-            //     if ($stmt->execute()) {
-            //         $stmt->store_result();
+                if ($stmt->execute()) {
+                    $stmt->store_result();
                     
-            //         if ($stmt->num_rows == 1) {
-            //             while ($row = $stmt->get_result()->fetch_assoc()) {
-            //                 $address = $row["AddressID"];
-            //             }
-            //         } else {
-            //             $stmt->close();
-            //             $sql = "INSERT INTO Address VALUES (?, ?, ?, ?);";
+                    if ($stmt->num_rows == 1) {
+                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                            $address = $row["AddressID"];
+                        }
+                    } else {
+                        $stmt->close();
+                        $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?);";
 
-            //             if ($stmt = $conn->prepare($sql)) {
-            //                 $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+                        if ($stmt = $conn->prepare($sql)) {
+                            $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
-            //                 if ($stmt->execute()) {
-            //                     $stmt->store_result();
+                            if ($stmt->execute()) {
+                                $stmt->store_result();
 
-            //                     $address = $stmt->insert_id;
-            //                 } else {
-            //                     echo "Something went wrong, please try again later.";
-            //                 }
-            //                 $stmt->close();
-            //             }
-            //         }
-            //     } else {
-            //         "Something went wrong, please try again.";
-            //     }
-            // }
+                                $address = $stmt->insert_id;
+                            } else {
+                                echo "Something went wrong, please try again later.";
+                            }
+                            $stmt->close();
+                        }
+                    }
+                } else {
+                    "Something went wrong, please try again.";
+                }
+            }
             
-            // $sql = "INSERT INTO School VALUES (?, ?, ?);";
+            $sql = "INSERT INTO School(Name, District, AddressID) VALUES (?, ?, ?);";
 
-            // if ($stmt = $conn->prepare($sql)) {
-            //     $stmt->bind_param("ssi", $param_name, $param_district, $param_addr);
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("ssi", $param_name, $param_district, $param_addr);
 
-            //     $param_name = $name;
-            //     $param_district = $district;
-            //     $param_addr = 0;
+                $param_name = $name;
+                $param_district = $district;
+                $param_addr = 0;
 
-            //     if ($stmt->execute()) {
-            //         echo "record Created";
-            //     } else {
-            //         echo "Something went wrong, please try again.";
-            //     }
-            // }
+                if ($stmt->execute()) {
+                    echo "Record created";
+                } else {
+                    echo "Something went wrong, please try again.";
+                }
+            }
         }
         $conn->close();
     }
