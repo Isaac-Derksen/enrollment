@@ -79,12 +79,7 @@
                     
                     if ($stmt->num_rows != 1) {
                         $stmt->close();
-                        $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?);";
-
-                        $param_street = $street;
-                        $param_city = $city;
-                        $param_state = $state;
-                        $param_zip = $zip;
+                        $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?)";
 
                         if ($stmt = $conn->prepare($sql)) {
                             $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
@@ -94,7 +89,7 @@
 
                                 $address = $stmt->insert_id;
                             } else {
-                                echo "Something went wrong, please try again later.";
+                                echo "Something went wrong, please try again later. ".$stmt->error;
                                 exit();
                             }
                             $stmt->close();
