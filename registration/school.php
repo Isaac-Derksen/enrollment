@@ -77,11 +77,7 @@
                 if ($stmt->execute()) {
                     $stmt->store_result();
                     
-                    if ($stmt->num_rows == 1) {
-                        while ($row = $stmt->get_result()->fetch_assoc()) {
-                            $address = $row["AddressID"];
-                        }
-                    } else {
+                    if ($stmt->num_rows != 1) {
                         $stmt->close();
                         $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?);";
 
@@ -94,12 +90,19 @@
                                 $address = $stmt->insert_id;
                             } else {
                                 echo "Something went wrong, please try again later.";
+                                exit();
                             }
                             $stmt->close();
+                        }
+                    } elseif ($stmt->num_rows == 1) {
+                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                            $address = $row["AddressID"];
+                            echo $address;
                         }
                     }
                 } else {
                     "Something went wrong, please try again.";
+                    exit();
                 }
             }
             
@@ -110,7 +113,7 @@
 
                 $param_name = $name;
                 $param_district = $district;
-                $param_addr = 0;
+                $param_addr = $address;
 
                 if ($stmt->execute()) {
                     echo "Record created";
