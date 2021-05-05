@@ -23,7 +23,7 @@
 
         if (empty($group_err) && empty($grade_err) && empty($name_err)) {
             require_once "../config.php";
-            $sql = "INSERT INTO Class (ClassCode, GroupID, GradeLevel, Name) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO Class (GroupID, GradeLevel, Name) VALUES (?, ?, ?)";
         
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("sss", $param_group, $param_grade, $param_name);

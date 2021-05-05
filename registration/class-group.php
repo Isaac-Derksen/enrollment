@@ -18,7 +18,7 @@
 
         if (empty($school_err) && empty($name_err)) {
             require_once "../config.php";
-            $sql = "INSERT INTO ClassGroup (GroupId, SchoolID, Name) VALUES (?, ?)";
+            $sql = "INSERT INTO ClassGroup (SchoolID, Name) VALUES (?, ?)";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("ss", $param_school, $param_name);
