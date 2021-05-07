@@ -63,7 +63,7 @@
 
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (/* empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error) */ true) {
+        if (empty($name_error) && empty($district_error) && empty($street_error) && empty($city_error) && empty($state_error) && empty($zip_error)) {
             $sql = "SELECT AddressID FROM Address WHERE Street = ? AND City = ? AND State = ? AND Zipcode = ?";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -77,7 +77,11 @@
                 if ($stmt->execute()) {
                     $stmt->store_result();
                     
-                    if ($stmt->num_rows != 1) {
+                    if ($stmt->num_rows == 1) {
+                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                            $address = $row["AddressID"];
+                        }
+                    } else {
                         $stmt->close();
                         $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?)";
 
@@ -93,11 +97,6 @@
                                 exit();
                             }
                             $stmt->close();
-                        }
-                    } elseif ($stmt->num_rows == 1) {
-                        while ($row = $stmt->get_result()->fetch_assoc()) {
-                            $address = $row["AddressID"];
-                            echo $address;
                         }
                     }
                 } else {
