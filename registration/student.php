@@ -118,7 +118,12 @@
 <body>
     <div>
         <form action="./student.php" method="POST">
-            
+            <label for="fname">First Name: </label>
+            <input type="text" name="fname" id="fname">
+            <label for="mname">Middle Name: </label>
+            <input type="text" name="mname" id="mname">
+            <label for="lname">Last Name: </label>
+            <br>
         </form>
     </div>
 </body>
