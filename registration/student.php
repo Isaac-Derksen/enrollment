@@ -7,9 +7,9 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty(trim($_POST["name"]))) {
-            $name_error = "Please provide Your name.";
+            $fname_error = "Please provide Your name.";
         } else {
-            $sql = "SELECT Name FROM StudentContact WHERE Name = ?";
+            $sql = "SELECT fname FROM Student WHERE Name = ?";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param("s", $param_name);
@@ -116,6 +116,10 @@
         <link media="all" type="text/css" rel="stylesheet" href="/style.css">
 </head>
 <body>
-    
+    <div>
+        <form action="./student.php" method="POST">
+            
+        </form>
+    </div>
 </body>
 </html>
