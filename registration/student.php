@@ -85,7 +85,10 @@
             $zip = trim($_POST["zip"]);
         }
 
+        // todo
+        if (empty(trim($_POST["enrolled"]))) {
 
+        }
 
         // Check to see if any errors exist and if not, add the entry to the database
         if (
@@ -201,21 +204,21 @@
         <form action="./student.php" method="POST">
             <div class="form-group">
                 <label for="fname">First Name: </label>
-                <input type="text" name="fname" id="fname"
+                <input type="text" name="fname"
                     class="form-control <?php echo (!empty($fname_error)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $fname; ?>">
                 <span class="invalid-feedback"><?php echo $fname_error; ?></span>
             </div>
             <div class="form-group">
                 <label for="mname">Middle Name: </label>
-                <input type="text" name="mname" id="mname"
+                <input type="text" name="mname"
                     class="form-control <?php echo (!empty($mname_error)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $mname; ?>">
                 <span class="invalid-feedback"><?php echo $mname_error; ?></span>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name: </label>
-                <input type="text" name="lname" id="lname"
+                <input type="text" name="lname"
                     class="form-control <?php echo (!empty($lname_error)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $lname; ?>">
                 <span class="invalid-feedback"><?php echo $lname_error; ?></span>
@@ -243,35 +246,38 @@
                 <span class="invalid-feedback"><?php echo $gender_err ?></span>
             </div>
             <div class="form-group">
-            <label for="Birthdate">Birth day: </label>
-            <input type="date" name="Birthdate" id="birthday <?php echo (!empty($birthdate_error)) ? 'is-invalid' : ''; ?>"
-            value="">
+                <label for="birthday">Birth day: </label>
+                <input type="date" name="birthday"
+                    class="form-control <?php echo (!empty($birthday_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php $birthday ?>">
+                <span class="invalid-feedback"><?php $birthday_err ?></span>
             </div>
             <div class="form-group">
-            <label for="phonenumber">Phonenumber: </label>
-            <input type="text" name="phonenumber" id="phonenumber <?php echo (!empty($phonenumber_error)) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $phonenumber; ?>">
-            <span class="invalid-feedback"><?php echo $phonenumber_error; ?></span>
+                <label for="phone">Phone Number: </label>
+                <input type="text" name="phone"
+                    class="form-control <?php echo (!empty($phone_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $phone; ?>">
+                <span class="invalid-feedback"><?php echo $phone_err; ?></span>
             </div>
-            <br>
             <div class="form-group">
             <label for="email">Email: </label>
-            <input type="text" name="email" id="email  <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $email; ?>">
-            <span class="invalid-feedback"><?php echo $email_error; ?></span>
+            <input type="text" name="email" 
+                class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>"
+                value="<?php echo $email; ?>">
+                <span class="invalid-feedback"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group">
-            <label for="gradelevel">Grade Level: </label>
-            <input type="number" name="gradelevel" id="grade  <?php echo (!empty($grade_error)) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $grade; ?>">
+            <label for="grade">Grade Level: </label>
+            <input type="number" name="grade" 
+                class="form-control <?php echo (!empty($grade_error)) ? 'is-invalid' : ''; ?>"
+                value="<?php echo $grade; ?>">
             </div>
             <div class="form-group">
-            <label for="enrolled">Are You Enrolled?: </label>
-            <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
-            value="">
-            <label for="enrolled">Yes</label>
-            <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
-            value="">
+                <label for="enrolled">Are You Enrolled?: </label>
+                <input type="checkbox" name="" id=""> <!-- todo -->
+                <label for="enrolled">Yes</label>
+                <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
+                value="">
             </div>
         </form>
     </div>
