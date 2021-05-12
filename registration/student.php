@@ -62,25 +62,25 @@
         }
 
         if (empty(trim($_POST["street"]))) {
-            $street_error = "Please supply the street address.";
+            $street_err = "Please supply the street address.";
         } else {
             $street = trim($_POST["street"]);
         }
 
         if (empty(trim($_POST["city"]))) {
-            $city_error = "Please supply the city the school is located in.";
+            $city_err = "Please supply the city the school is located in.";
         } else {
             $city = trim($_POST["city"]);
         }
 
         if (empty(trim($_POST["state"]))) {
-            $state_error = "Please supply the state the school is located in.";
+            $state_err = "Please supply the state the school is located in.";
         } else {
             $state = trim($_POST["state"]);
         }
 
         if (empty(trim($_POST["zip"]))) {
-            $zip_error = "Please supply the zip code";
+            $zip_err = "Please supply the zip code";
         } else {
             $zip = trim($_POST["zip"]);
         }
@@ -88,7 +88,22 @@
 
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (true) {
+        if (
+            empty($school_err)   && 
+            empty($fname_err)    && 
+            empty($mname_err)    && 
+            empty($lname_err)    && 
+            empty($gender_err)   && 
+            empty($birthday_err) &&
+            empty($phone_err)    && 
+            empty($email_err)    && 
+            empty($street_err)   && 
+            empty($city_err)     && 
+            empty($state_err)    &&
+            empty($zip_err)      &&
+            empty($grade_err)    &&
+            empty($isFullyEnrolled_err
+        )) {
             $sql = "";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -131,17 +146,38 @@
                 }
             }
             
-            $sql = "INSERT INTO School(Name, District, AddressID) VALUES (?, ?, ?);";
+            $sql = "INSERT INTO Student(SchoolID, Firstname, Middlename, Lastname, Gender, Birthdate, Phonenumber, Email, AddressID, Gradelevel, IsFullyEnrolled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
             if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("ssi", $param_name, $param_district, $param_addr);
+                $stmt->bind_param(
+                    "sssssssssss", 
+                    $param_school, 
+                    $param_fname, 
+                    $param_mname,
+                    $param_lname,
+                    $param_gender,
+                    $param_birthday,
+                    $param_phone,
+                    $param_email,
+                    $param_address,
+                    $param_grade,
+                    $param_enrolled
+                );
 
-                $param_name = $name;
-                $param_district = $district;
-                $param_addr = $address;
+                $param_school = $school;
+                $param_fname = $fname;
+                $param_mname = $mname;
+                $param_lname = $lname;
+                $param_gender = $gender;
+                $param_birthday = $birthday;
+                $param_phone = $phone;
+                $param_email = $email;
+                $param_address = $address;
+                $param_grade = $grade;
+                $param_enrolled = $isFullyEnrolled;
 
                 if ($stmt->execute()) {
-                    header("location: ../schools?id=".$stmt->insert_id);
+                    
                 } else {
                     echo "Something went wrong, please try again.";
                 }
