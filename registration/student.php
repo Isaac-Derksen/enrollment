@@ -238,13 +238,31 @@
             value="">
             </div>
             <div class="form-group">
-            <label for="phonrnumber">Phonenumber: </label>
+            <label for="phonenumber">Phonenumber: </label>
             <input type="text" name="phonenumber" id="phonenumber <?php echo (!empty($phonenumber_error)) ? 'is-invalid' : ''; ?>"
             value="<?php echo $phonenumber; ?>">
             <span class="invalid-feedback"><?php echo $phonenumber_error; ?></span>
             </div>
             <br>
-            div
+            <div class="form-group">
+            <label for="email">Email: </label>
+            <input type="text" name="email" id="email  <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $email; ?>">
+            <span class="invalid-feedback"><?php echo $email_error; ?></span>
+            </div>
+            <div class="form-group">
+            <label for="gradelevel">Grade Level: </label>
+            <input type="number" name="gradelevel" id="grade  <?php echo (!empty($grade_error)) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $grade; ?>">
+            </div>
+            <div class="form-group">
+            <label for="enrolled">Are You Enrolled?: </label>
+            <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            <label for="enrolled">Yes</label>
+            <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            </div>
         </form>
     </div>
 </body>
