@@ -118,12 +118,39 @@
 <body>
     <div>
         <form action="./student.php" method="POST">
-            <label for="fname">First Name: </label>
-            <input type="text" name="fname" id="fname">
-            <label for="mname">Middle Name: </label>
-            <input type="text" name="mname" id="mname">
-            <label for="lname">Last Name: </label>
+            <div class="form-group">
+                <label for="fname">First Name: </label>
+                <input type="text" name="fname" id="fname"
+                    class="form-control <?php echo (!empty($fname_error)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $fname; ?>">
+                <span class="invalid-feedback"><?php echo $fname_error; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="mname">Middle Name: </label>
+                <input type="text" name="mname" id="mname"
+                class="form-control <?php echo (!empty($mname_error)) ? 'is-invalid' : ''; ?>"
+                value="<?php echo $mname; ?>">
+                <span class="invalid-feedback"><?php echo $mname_error; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name: </label>
+                <input type="text" name="lname" id="lname"
+                class="form-control <?php echo (!empty($lname_error)) ? 'is-invalid' : ''; ?>"
+                value="<?php echo $lname; ?>">
+                <span class="invalid-feedback"><?php echo $lname_error; ?></span>
+            </div>
             <br>
+            <div class="form-group">
+            <label for="gender">Gender: </label>
+            <input type="radio" name="gender" id="male" class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            <label for="gender">Male </label>
+            <input type="radio" name="gender" id="female" class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            <label for="gender">Female </label>
+            <input type="radio" name="gender" id="other" class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            </div>
         </form>
     </div>
 </body>
