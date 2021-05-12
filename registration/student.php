@@ -151,6 +151,19 @@
             <input type="radio" name="gender" id="other" class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
             value="">
             </div>
+            <div class="form-group">
+            <label for="Birthdate">Birth day: </label>
+            <input type="date" name="Birthdate" id="birthday <?php echo (!empty($birthdate_error)) ? 'is-invalid' : ''; ?>"
+            value="">
+            </div>
+            <div class="form-group">
+            <label for="phonrnumber">Phonenumber: </label>
+            <input type="text" name="phonenumber" id="phonenumber <?php echo (!empty($phonenumber_error)) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $phonenumber; ?>">
+            <span class="invalid-feedback"><?php echo $phonenumber_error; ?></span>
+            </div>
+            <br>
+            div
         </form>
     </div>
 </body>
