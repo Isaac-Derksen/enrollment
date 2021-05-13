@@ -278,6 +278,11 @@
                 <label for="enrolled">Yes</label>
                 <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
                 value="">
+                <label for="enrolled">No</label>
+            </div>
+            <div class="form-group">
+            <input type="submit" value="submit" class="btn btn-primary">
+            <input type="reset" value="reset" class="btn btn-secondary m1-2">
             </div>
         </form>
     </div>
