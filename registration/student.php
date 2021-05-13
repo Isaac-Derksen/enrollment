@@ -1,8 +1,4 @@
 <?php
-    // form names should be: SchoolName = name; District = dist; Address = addr
-
-use function PHPSTORM_META\type;
-
 require_once "../config.php";
 
     $school = $fname = $mname = $lname = $gender = $birthday = $phone = $email = $street = $city = $state = $zip = $grade = $isFullyEnrolled = "";
@@ -90,7 +86,7 @@ require_once "../config.php";
 
         // todo
         echo $_POST["enrolled"];
-        echo type($isFullyEnrolled);
+        var_dump($isFullyEnrolled);
 
 
         // if (empty(trim($_POST["enrolled"]))) {
