@@ -286,6 +286,18 @@ require_once "../config.php";
                 <span class="invalid-feedback"><?php echo $isFullyEnrolled_err ?></span>
             </div>
             <div class="form-group">
+                <label for="street">Street</label>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                </div>
+            <div class="form-group">
+                <label for="zip">Zipcode</label>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary">
                 <input type="reset" value="Clear" clear="btn btn-secondary m1-2">
             </div>
