@@ -104,103 +104,103 @@ require_once "../config.php";
         // }
 
         // Check to see if any errors exist and if not, add the entry to the database
-        if (
-            empty($school_err)   && 
-            empty($fname_err)    && 
-            empty($mname_err)    && 
-            empty($lname_err)    && 
-            empty($gender_err)   && 
-            empty($birthday_err) &&
-            empty($phone_err)    && 
-            empty($email_err)    && 
-            empty($street_err)   && 
-            empty($city_err)     && 
-            empty($state_err)    &&
-            empty($zip_err)      &&
-            empty($grade_err)    &&
-            empty($isFullyEnrolled_err) && 
-            false
-        ) {
-            $sql = "";
+        // if (
+        //     empty($school_err)   && 
+        //     empty($fname_err)    && 
+        //     empty($mname_err)    && 
+        //     empty($lname_err)    && 
+        //     empty($gender_err)   && 
+        //     empty($birthday_err) &&
+        //     empty($phone_err)    && 
+        //     empty($email_err)    && 
+        //     empty($street_err)   && 
+        //     empty($city_err)     && 
+        //     empty($state_err)    &&
+        //     empty($zip_err)      &&
+        //     empty($grade_err)    &&
+        //     empty($isFullyEnrolled_err) && 
+        //     false
+        // ) {
+        //     $sql = "";
 
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+        //     if ($stmt = $conn->prepare($sql)) {
+        //         $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
-                $param_street = $street;
-                $param_city = $city;
-                $param_state = $state;
-                $param_zip = $zip;
+        //         $param_street = $street;
+        //         $param_city = $city;
+        //         $param_state = $state;
+        //         $param_zip = $zip;
 
-                if ($stmt->execute()) {
-                    $stmt->store_result();
+        //         if ($stmt->execute()) {
+        //             $stmt->store_result();
                     
-                    if ($stmt->num_rows != 1) {
-                        $stmt->close();
-                        $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?)";
+        //             if ($stmt->num_rows != 1) {
+        //                 $stmt->close();
+        //                 $sql = "INSERT INTO Address(Street, City, State, Zipcode) VALUES (?, ?, ?, ?)";
 
-                        if ($stmt = $conn->prepare($sql)) {
-                            $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
+        //                 if ($stmt = $conn->prepare($sql)) {
+        //                     $stmt->bind_param("ssss", $param_street, $param_city, $param_state, $param_zip);
 
-                            if ($stmt->execute()) {
-                                $stmt->store_result();
+        //                     if ($stmt->execute()) {
+        //                         $stmt->store_result();
 
-                                $address = $stmt->insert_id;
-                            } else {
-                                echo "Something went wrong, please try again later. ";
-                                exit();
-                            }
-                            $stmt->close();
-                        }
-                    } elseif ($stmt->num_rows == 1) {
-                        while ($row = $stmt->get_result()->fetch_assoc()) {
-                            $address = $row["AddressID"];
-                            echo $address;
-                        }
-                    }
-                } else {
-                    "Something went wrong, please try again.";
-                    exit();
-                }
-            }
+        //                         $address = $stmt->insert_id;
+        //                     } else {
+        //                         echo "Something went wrong, please try again later. ";
+        //                         exit();
+        //                     }
+        //                     $stmt->close();
+        //                 }
+        //             } elseif ($stmt->num_rows == 1) {
+        //                 while ($row = $stmt->get_result()->fetch_assoc()) {
+        //                     $address = $row["AddressID"];
+        //                     echo $address;
+        //                 }
+        //             }
+        //         } else {
+        //             "Something went wrong, please try again.";
+        //             exit();
+        //         }
+        //     }
             
-            $sql = "INSERT INTO Student(SchoolID, Firstname, Middlename, Lastname, Gender, Birthdate, Phonenumber, Email, AddressID, Gradelevel, IsFullyEnrolled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        //     $sql = "INSERT INTO Student(SchoolID, Firstname, Middlename, Lastname, Gender, Birthdate, Phonenumber, Email, AddressID, Gradelevel, IsFullyEnrolled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param(
-                    "sssssssssss", 
-                    $param_school, 
-                    $param_fname, 
-                    $param_mname,
-                    $param_lname,
-                    $param_gender,
-                    $param_birthday,
-                    $param_phone,
-                    $param_email,
-                    $param_address,
-                    $param_grade,
-                    $param_enrolled
-                );
+        //     if ($stmt = $conn->prepare($sql)) {
+        //         $stmt->bind_param(
+        //             "sssssssssss", 
+        //             $param_school, 
+        //             $param_fname, 
+        //             $param_mname,
+        //             $param_lname,
+        //             $param_gender,
+        //             $param_birthday,
+        //             $param_phone,
+        //             $param_email,
+        //             $param_address,
+        //             $param_grade,
+        //             $param_enrolled
+        //         );
 
-                $param_school = $school;
-                $param_fname = $fname;
-                $param_mname = $mname;
-                $param_lname = $lname;
-                $param_gender = $gender;
-                $param_birthday = $birthday;
-                $param_phone = $phone;
-                $param_email = $email;
-                $param_address = $address;
-                $param_grade = $grade;
-                $param_enrolled = $isFullyEnrolled;
+        //         $param_school = $school;
+        //         $param_fname = $fname;
+        //         $param_mname = $mname;
+        //         $param_lname = $lname;
+        //         $param_gender = $gender;
+        //         $param_birthday = $birthday;
+        //         $param_phone = $phone;
+        //         $param_email = $email;
+        //         $param_address = $address;
+        //         $param_grade = $grade;
+        //         $param_enrolled = $isFullyEnrolled;
 
-                if ($stmt->execute()) {
+        //         if ($stmt->execute()) {
                     
-                } else {
-                    echo "Something went wrong, please try again.";
-                }
-            }
-        }
-        $conn->close();
+        //         } else {
+        //             echo "Something went wrong, please try again.";
+        //         }
+        //     }
+        // }
+        // $conn->close();
     }
 ?>
 <html lang="en">
