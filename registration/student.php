@@ -211,40 +211,40 @@ require_once "../config.php";
             <div class="form-group">
                 <label for="fname">First Name: </label>
                 <input type="text" name="fname"
-                    class="form-control <?php echo (!empty($fname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($fname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $fname; ?>">
-                <span class="invalid-feedback"><?php echo $fname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $fname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="mname">Middle Name: </label>
                 <input type="text" name="mname"
-                    class="form-control <?php echo (!empty($mname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($mname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $mname; ?>">
-                <span class="invalid-feedback"><?php echo $mname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $mname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name: </label>
                 <input type="text" name="lname"
-                    class="form-control <?php echo (!empty($lname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($lname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $lname; ?>">
-                <span class="invalid-feedback"><?php echo $lname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $lname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="gender">Gender: </label>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="male"
                     <?php echo ($gender == "male") ? 'checked' : ''; ?>>
                     Male
                 </input>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="female"
                     <?php echo ($gender == "female") ? 'checked' : ''; ?>>
                     Female
                 </input>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="other"
                     <?php echo ($gender == "other") ? 'checked' : ''; ?>>
                     Other
@@ -275,7 +275,7 @@ require_once "../config.php";
             <div class="form-group">
             <label for="grade">Grade Level: </label>
             <input type="number" name="grade" 
-                class="form-control <?php echo (!empty($grade_error)) ? 'is-invalid' : ''; ?>"
+                class="form-control <?php echo (!empty($grade_err)) ? 'is-invalid' : ''; ?>"
                 value="<?php echo $grade; ?>">
             </div>
             <div class="form-group">
