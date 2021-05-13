@@ -159,7 +159,7 @@ require_once "../config.php";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "sssssssssss", 
+                    "ssssssssssb", 
                     $param_school, 
                     $param_fname, 
                     $param_mname,
