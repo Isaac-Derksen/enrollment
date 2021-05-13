@@ -1,6 +1,9 @@
 <?php
     // form names should be: SchoolName = name; District = dist; Address = addr
-    require_once "../config.php";
+
+use function PHPSTORM_META\type;
+
+require_once "../config.php";
 
     $school = $fname = $mname = $lname = $gender = $birthday = $phone = $email = $street = $city = $state = $zip = $grade = $isFullyEnrolled = "";
     $school_err = $fname_err = $mname_err = $lname_err = $gender_err = $birthday_err = $phone_err = $email_err = $street_err = $city_err = $state_err = $zip_err = $grade_err = $isFullyEnrolled_err = "";
@@ -86,9 +89,23 @@
         }
 
         // todo
-        if (empty(trim($_POST["enrolled"]))) {
+        echo $_POST["enrolled"];
+        echo type($isFullyEnrolled);
 
-        }
+
+        // if (empty(trim($_POST["enrolled"]))) {
+        //     $isFullyEnrolled = false;
+        // } else {
+        //     switch (trim($_POST["enrolled"])) {
+        //         case 'false':
+        //             $isFullyEnrolled = false;
+        //             break;
+                
+        //         default:
+        //             $isFullyEnrolled = false;
+        //             break;
+        //     }
+        // }
 
         // Check to see if any errors exist and if not, add the entry to the database
         if (
@@ -105,8 +122,9 @@
             empty($state_err)    &&
             empty($zip_err)      &&
             empty($grade_err)    &&
-            empty($isFullyEnrolled_err
-        )) {
+            empty($isFullyEnrolled_err) && 
+            false
+        ) {
             $sql = "";
 
             if ($stmt = $conn->prepare($sql)) {
@@ -274,10 +292,10 @@
             </div>
             <div class="form-group">
                 <label for="enrolled">Are You Enrolled?: </label>
-                <input type="checkbox" name="" id=""> <!-- todo -->
-                <label for="enrolled">Yes</label>
-                <input type="radio" name="enrolled" id="enrolled  <?php echo (!empty($isFullyEnrolled_error)) ? 'is-invalid' : ''; ?>"
-                value="">
+                <input type="checkbox" name="enrolled" value="true"
+                    class="form-control <?php echo (!empty($isFullyEnrolled_err)) ? 'is-invalid' : '' ?>"
+                    <?php echo ($isFullyEnrolled == "true") ? 'checked' : '' ?>>
+                <span class="invalid-feedback"><?php echo $isFullyEnrolled_err ?></span>
             </div>
         </form>
     </div>
