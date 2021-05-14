@@ -159,7 +159,7 @@ require_once "../config.php";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "sssssssssss", 
+                    "ssssssssssb", 
                     $param_school, 
                     $param_fname, 
                     $param_mname,
@@ -200,7 +200,7 @@ require_once "../config.php";
     <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student contacts</title>
+        <title>Student sign up</title>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link media="all" type="text/css" rel="stylesheet" href="/style.css">
@@ -211,40 +211,40 @@ require_once "../config.php";
             <div class="form-group">
                 <label for="fname">First Name: </label>
                 <input type="text" name="fname"
-                    class="form-control <?php echo (!empty($fname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($fname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $fname; ?>">
-                <span class="invalid-feedback"><?php echo $fname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $fname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="mname">Middle Name: </label>
                 <input type="text" name="mname"
-                    class="form-control <?php echo (!empty($mname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($mname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $mname; ?>">
-                <span class="invalid-feedback"><?php echo $mname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $mname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name: </label>
                 <input type="text" name="lname"
-                    class="form-control <?php echo (!empty($lname_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($lname_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $lname; ?>">
-                <span class="invalid-feedback"><?php echo $lname_error; ?></span>
+                <span class="invalid-feedback"><?php echo $lname_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="gender">Gender: </label>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="male"
                     <?php echo ($gender == "male") ? 'checked' : ''; ?>>
                     Male
                 </input>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="female"
                     <?php echo ($gender == "female") ? 'checked' : ''; ?>>
                     Female
                 </input>
                 <input type="radio" name="gender" 
-                    class="form-control <?php echo (!empty($gender_error)) ? 'is-invalid' : ''; ?>"
+                    class="form-control <?php echo (!empty($gender_err)) ? 'is-invalid' : ''; ?>"
                     value="other"
                     <?php echo ($gender == "other") ? 'checked' : ''; ?>>
                     Other
@@ -275,7 +275,7 @@ require_once "../config.php";
             <div class="form-group">
             <label for="grade">Grade Level: </label>
             <input type="number" name="grade" 
-                class="form-control <?php echo (!empty($grade_error)) ? 'is-invalid' : ''; ?>"
+                class="form-control <?php echo (!empty($grade_err)) ? 'is-invalid' : ''; ?>"
                 value="<?php echo $grade; ?>">
             </div>
             <div class="form-group">
@@ -284,6 +284,34 @@ require_once "../config.php";
                     class="form-control <?php echo (!empty($isFullyEnrolled_err)) ? 'is-invalid' : '' ?>"
                     <?php echo ($isFullyEnrolled == "true") ? 'checked' : '' ?>>
                 <span class="invalid-feedback"><?php echo $isFullyEnrolled_err ?></span>
+            </div>
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" name="street" 
+                    class="form-control <?php echo (!empty($street_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $street; ?>">
+                <span class="invalid-feedback"><?php echo $street_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" name="city" 
+                    class="form-control <?php echo (!empty($city_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $city; ?>">
+                <span class="invalid-feedback"><?php echo $city_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" name="state" 
+                    class="form-control <?php echo (!empty($state_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $state; ?>">
+                <span class="invalid-feedback"><?php echo $state_err; ?></span>
+                </div>
+            <div class="form-group">
+                <label for="zip">Zipcode</label>
+                <input type="text" name="zip" 
+                    class="form-control <?php echo (!empty($zip_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $zip; ?>">
+                <span class="invalid-feedback"><?php echo $zip_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary">
