@@ -210,9 +210,10 @@ require_once "../config.php";
         <form action="./student.php" method="POST">
         <div class="form-group">
             <label for="school">School ID:</label>
-            <input type="text" name="school"
+            <input type="number" name="school"
             class="form-control <?php echo (!empty($school_err)) ? 'is-invalid' : ''; ?>"
             value="<?php echo $school; ?>">
+            <span class="invalid-feedback"><?php echo $school_err; ?></span>
         </div>
             <div class="form-group">
                 <label for="fname">First Name: </label>
