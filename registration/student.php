@@ -200,7 +200,7 @@ require_once "../config.php";
     <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Student contacts</title>
+        <title>Student sign up</title>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link media="all" type="text/css" rel="stylesheet" href="/style.css">
@@ -287,28 +287,28 @@ require_once "../config.php";
             </div>
             <div class="form-group">
                 <label for="street">Street</label>
-                <input type="text" name="email" 
+                <input type="text" name="street" 
                     class="form-control <?php echo (!empty($street_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $street; ?>">
                 <span class="invalid-feedback"><?php echo $street_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="city">City</label>
-                <input type="text" name="email" 
+                <input type="text" name="city" 
                     class="form-control <?php echo (!empty($city_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $city; ?>">
                 <span class="invalid-feedback"><?php echo $city_err; ?></span>
             </div>
             <div class="form-group">
                 <label for="state">State</label>
-                <input type="text" name="email" 
+                <input type="text" name="state" 
                     class="form-control <?php echo (!empty($state_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $state; ?>">
                 <span class="invalid-feedback"><?php echo $state_err; ?></span>
                 </div>
             <div class="form-group">
                 <label for="zip">Zipcode</label>
-                <input type="text" name="email" 
+                <input type="text" name="zip" 
                     class="form-control <?php echo (!empty($zip_err)) ? 'is-invalid' : ''; ?>"
                     value="<?php echo $zip; ?>">
                 <span class="invalid-feedback"><?php echo $zip_err; ?></span>
