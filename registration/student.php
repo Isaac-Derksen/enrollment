@@ -39,7 +39,7 @@ require_once "../config.php";
         if (empty(trim($_POST["birthday"]))) {
             $birthday_err = "please select a birthday.";
         } else {
-            $birthday = trim($_POST["birthday"]);
+            $birthday = date("Y-m-d", trim($_POST["birthday"]));
         }
 
         if (empty(trim($_POST["phone"]))) {
