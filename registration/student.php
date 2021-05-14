@@ -286,6 +286,34 @@ require_once "../config.php";
                 <span class="invalid-feedback"><?php echo $isFullyEnrolled_err ?></span>
             </div>
             <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" name="email" 
+                    class="form-control <?php echo (!empty($street_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $street; ?>">
+                <span class="invalid-feedback"><?php echo $street_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" name="email" 
+                    class="form-control <?php echo (!empty($city_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $city; ?>">
+                <span class="invalid-feedback"><?php echo $city_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" name="email" 
+                    class="form-control <?php echo (!empty($state_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $state; ?>">
+                <span class="invalid-feedback"><?php echo $state_err; ?></span>
+                </div>
+            <div class="form-group">
+                <label for="zip">Zipcode</label>
+                <input type="text" name="email" 
+                    class="form-control <?php echo (!empty($zip_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $zip; ?>">
+                <span class="invalid-feedback"><?php echo $zip_err; ?></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary">
                 <input type="reset" value="Clear" clear="btn btn-secondary m1-2">
             </div>
