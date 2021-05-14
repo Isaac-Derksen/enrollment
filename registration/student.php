@@ -209,10 +209,10 @@ require_once "../config.php";
     <div>
         <form action="./student.php" method="POST">
         <div class="form-group">
-            <label for="studentID">Student ID:</label>
-            <input type="text" name="studentID" id="studentID"
-            class="form-control <?php echo (!empty($studentID_err)) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $studentID; ?>">
+            <label for="studentID">School ID:</label>
+            <input type="text" name="school" id="school"
+            class="form-control <?php echo (!empty($school_err)) ? 'is-invalid' : ''; ?>"
+            value="<?php echo $school; ?>">
         </div>
             <div class="form-group">
                 <label for="fname">First Name: </label>
