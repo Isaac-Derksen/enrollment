@@ -144,7 +144,7 @@ require_once "../config.php";
                             $stmt->close();
                         }
                     } elseif ($stmt->num_rows == 1) {
-                        while ($row = $stmt->get_result()->fetch_assoc()) {
+                        while ($row = $stmt->get_result()->fetch_row()) {
                             $address = $row["AddressID"];
                             echo $address;
                         }
